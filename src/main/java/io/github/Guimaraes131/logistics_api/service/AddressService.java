@@ -30,4 +30,8 @@ public class AddressService {
     public void delete(UUID id) {
         repository.deleteById(id);
     }
+
+    public void update(Address address) {
+        repository.save(address);
+    }
 }

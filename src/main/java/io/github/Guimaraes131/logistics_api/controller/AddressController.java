@@ -19,7 +19,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/address")
-public class AddressController {
+public class AddressController implements GenericController{
 
     private final AddressService service;
     private final AddressMapper mapper;
@@ -30,13 +30,7 @@ public class AddressController {
 
         service.create(address);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(address.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(generateLocationHeader(address.getId())).build();
     }
 
     @GetMapping("/{id}")

@@ -33,7 +33,8 @@ public class Delivery {
     @Column(name = "delivery_date")
     private LocalDateTime deliveryDate;
 
-    private String receiver;
+    @ManyToOne
+    private Recipient recipient;
 
     @OneToOne
     private Address address;

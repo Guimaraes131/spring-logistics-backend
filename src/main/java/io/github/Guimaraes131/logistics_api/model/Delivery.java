@@ -36,9 +36,6 @@ public class Delivery {
     @ManyToOne
     private Recipient recipient;
 
-    @OneToOne
-    private Address address;
-
-    @OneToMany
+    @OneToMany(mappedBy = "delivery")
     private List<Product> products;
 }

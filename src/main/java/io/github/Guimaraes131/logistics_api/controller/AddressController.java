@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.swing.text.html.parser.Entity;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -57,5 +58,14 @@ public class AddressController {
                 .map(mapper::toDTO)
                 .toList()
         );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        UUID entityId = UUID.fromString(id);
+
+        service.delete(entityId);
+
+        return ResponseEntity.noContent().build();
     }
 }

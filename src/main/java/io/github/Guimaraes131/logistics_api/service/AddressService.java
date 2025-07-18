@@ -26,4 +26,8 @@ public class AddressService {
     public List<Address> index() {
         return repository.findAll();
     }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
+    }
 }

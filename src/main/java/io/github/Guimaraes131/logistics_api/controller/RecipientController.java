@@ -1,15 +1,15 @@
 package io.github.Guimaraes131.logistics_api.controller;
 
+import io.github.Guimaraes131.logistics_api.controller.dto.GetRecipientDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostRecipientDTO;
 import io.github.Guimaraes131.logistics_api.controller.mapper.RecipientMapper;
 import io.github.Guimaraes131.logistics_api.model.Recipient;
 import io.github.Guimaraes131.logistics_api.service.RecipientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,5 +26,15 @@ public class RecipientController implements GenericController {
         service.create(recipient);
 
         return ResponseEntity.created(generateLocationHeader(recipient.getId())).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetRecipientDTO> get(@PathVariable UUID id) {
+        return service.get(id)
+                .map(recipient -> {
+                    GetRecipientDTO dto = mapper.toDTO(recipient);
+
+                    return ResponseEntity.ok(dto);
+                }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

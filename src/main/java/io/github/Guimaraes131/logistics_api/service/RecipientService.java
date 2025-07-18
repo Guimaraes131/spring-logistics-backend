@@ -5,6 +5,9 @@ import io.github.Guimaraes131.logistics_api.repository.RecipientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class RecipientService {
@@ -13,5 +16,9 @@ public class RecipientService {
 
     public void create(Recipient recipient) {
         repository.save(recipient);
+    }
+
+    public Optional<Recipient> get(UUID id) {
+        return repository.findById(id);
     }
 }

@@ -1,5 +1,6 @@
 package io.github.Guimaraes131.logistics_api.controller.mapper;
 
+import io.github.Guimaraes131.logistics_api.controller.dto.GetAddressDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostAddressDTO;
 import io.github.Guimaraes131.logistics_api.model.Address;
 import org.mapstruct.Mapper;
@@ -10,4 +11,6 @@ public interface AddressMapper {
 
     @Mapping(target = "id", ignore = true)
     Address toEntity(PostAddressDTO dto);
+
+    GetAddressDTO toDTO(Address entity);
 }

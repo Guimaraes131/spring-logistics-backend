@@ -5,6 +5,7 @@ import io.github.Guimaraes131.logistics_api.repository.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,5 +21,9 @@ public class AddressService {
 
     public Optional<Address> get(UUID id) {
         return repository.findById(id);
+    }
+
+    public List<Address> index() {
+        return repository.findAll();
     }
 }

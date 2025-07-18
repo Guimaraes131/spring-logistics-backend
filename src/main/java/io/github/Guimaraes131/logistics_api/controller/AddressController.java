@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,5 +46,16 @@ public class AddressController {
                     return ResponseEntity.ok().body(mapper.toDTO(address));
                 })
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<GetAddressDTO>> index() {
+        List<Address> index = service.index();
+
+        return ResponseEntity.ok(
+            index.stream()
+                .map(mapper::toDTO)
+                .toList()
+        );
     }
 }

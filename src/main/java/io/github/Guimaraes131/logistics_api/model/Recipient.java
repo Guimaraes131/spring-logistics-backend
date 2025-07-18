@@ -18,6 +18,9 @@ public class Recipient {
     private String name;
     private String cpf;
 
-    @OneToMany
-    private List<Delivery> delivery;
+    @OneToOne
+    private Address address;
+
+    @OneToMany(mappedBy = "recipient")
+    private List<Delivery> deliveries;
 }

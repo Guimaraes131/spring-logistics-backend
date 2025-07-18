@@ -19,6 +19,7 @@ public class Recipient {
     private String cpf;
 
     @OneToOne
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
     @OneToMany(mappedBy = "recipient")

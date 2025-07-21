@@ -3,6 +3,7 @@ package io.github.Guimaraes131.logistics_api.controller.common;
 import io.github.Guimaraes131.logistics_api.controller.dto.ErrorResponse;
 import io.github.Guimaraes131.logistics_api.controller.dto.FieldError;
 import io.github.Guimaraes131.logistics_api.exception.DuplicateRecordException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,5 +31,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handleDuplicateRecordException(DuplicateRecordException e) {
         return ErrorResponse.conflictResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleEntityNotFoundException(EntityNotFoundException e) {
+        return ErrorResponse.notFoundResponse(e.getMessage());
     }
 }

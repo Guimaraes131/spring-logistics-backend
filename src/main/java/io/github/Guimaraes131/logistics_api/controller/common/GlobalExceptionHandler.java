@@ -2,6 +2,7 @@ package io.github.Guimaraes131.logistics_api.controller.common;
 
 import io.github.Guimaraes131.logistics_api.controller.dto.ErrorResponse;
 import io.github.Guimaraes131.logistics_api.controller.dto.FieldError;
+import io.github.Guimaraes131.logistics_api.exception.DuplicateRecordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,5 +24,11 @@ public class GlobalExceptionHandler {
                 .toList();
 
         return new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.value(), "Validation Error", fe);
+    }
+
+    @ExceptionHandler(DuplicateRecordException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleDuplicateRecordException(DuplicateRecordException e) {
+        return ErrorResponse.conflictResponse(e.getMessage());
     }
 }

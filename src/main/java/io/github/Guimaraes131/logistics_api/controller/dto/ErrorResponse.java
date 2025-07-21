@@ -9,4 +9,8 @@ public record ErrorResponse(Integer status, String message, List<FieldError> err
     public static ErrorResponse conflictResponse(String message) {
         return new ErrorResponse(HttpStatus.CONFLICT.value(), message, List.of());
     }
+
+    public static ErrorResponse notFoundResponse(String message) {
+        return new ErrorResponse(HttpStatus.NOT_FOUND.value(), message, List.of());
+    }
 }

@@ -6,6 +6,7 @@ import io.github.Guimaraes131.logistics_api.controller.mapper.AddressMapper;
 import io.github.Guimaraes131.logistics_api.model.Address;
 import io.github.Guimaraes131.logistics_api.service.AddressService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class AddressController implements GenericController{
     private final AddressMapper mapper;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody PostAddressDTO dto) {
+    public ResponseEntity<?> create(@RequestBody @Valid PostAddressDTO dto) {
         Address address = mapper.toEntity(dto);
 
         service.create(address);
@@ -61,7 +62,7 @@ public class AddressController implements GenericController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody PostAddressDTO dto) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody @Valid PostAddressDTO dto) {
         return service.get(id)
                 .map(entity -> {
                     mapper.updateFromDTO(dto, entity);

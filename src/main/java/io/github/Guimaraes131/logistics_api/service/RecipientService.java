@@ -25,4 +25,8 @@ public class RecipientService {
     public void delete(UUID id) {
         repository.deleteById(id);
     }
+
+    public void update(Recipient recipient) {
+        repository.save(recipient);
+    }
 }

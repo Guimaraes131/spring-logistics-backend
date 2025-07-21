@@ -5,6 +5,7 @@ import io.github.Guimaraes131.logistics_api.controller.dto.PostRecipientDTO;
 import io.github.Guimaraes131.logistics_api.controller.mapper.RecipientMapper;
 import io.github.Guimaraes131.logistics_api.model.Recipient;
 import io.github.Guimaraes131.logistics_api.service.RecipientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class RecipientController implements GenericController {
     private final RecipientMapper mapper;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody PostRecipientDTO dto) {
+    public ResponseEntity<?> create(@RequestBody @Valid PostRecipientDTO dto) {
         Recipient recipient = mapper.toEntity(dto);
 
         service.create(recipient);
@@ -46,7 +47,7 @@ public class RecipientController implements GenericController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody PostRecipientDTO dto) {
+    public ResponseEntity<?> update(@PathVariable UUID id, @Valid @RequestBody PostRecipientDTO dto) {
         return service.get(id)
                 .map(entity -> {
                     mapper.updateFromDTO(dto, entity);

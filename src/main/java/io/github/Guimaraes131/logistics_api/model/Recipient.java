@@ -18,7 +18,7 @@ public class Recipient {
     private String name;
     private String cpf;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 

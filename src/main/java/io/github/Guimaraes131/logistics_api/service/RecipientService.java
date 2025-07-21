@@ -5,6 +5,7 @@ import io.github.Guimaraes131.logistics_api.controller.dto.PostRecipientDTO;
 import io.github.Guimaraes131.logistics_api.controller.mapper.RecipientMapper;
 import io.github.Guimaraes131.logistics_api.model.Recipient;
 import io.github.Guimaraes131.logistics_api.repository.RecipientRepository;
+import io.github.Guimaraes131.logistics_api.validator.AddressValidator;
 import io.github.Guimaraes131.logistics_api.validator.RecipientValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,14 @@ public class RecipientService {
 
     private final RecipientRepository repository;
     private final RecipientValidator validator;
+    private final AddressValidator addressValidator;
     private final RecipientMapper mapper;
 
 
     public Recipient create(PostRecipientDTO dto) {
-        Recipient recipient = mapper.toEntity(dto);
+        addressValidator.validateExists(dto.addressId());
 
-        validator.validateAddressExists(dto);
+        Recipient recipient = mapper.toEntity(dto);
         validator.validate(recipient);
 
         return repository.save(recipient);
@@ -40,6 +42,8 @@ public class RecipientService {
     }
 
     public void update(UUID id, PostRecipientDTO dto) {
+        addressValidator.validateExists(dto.addressId());
+
         var recipient = repository.findById(id).orElse(null);
 
         validator.validate(recipient);

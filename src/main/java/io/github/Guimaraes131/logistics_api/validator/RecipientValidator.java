@@ -16,7 +16,6 @@ import java.util.Optional;
 public class RecipientValidator {
 
     private final RecipientRepository recipientRepository;
-    private final AddressRepository addressRepository;
 
     public void validate(Recipient recipient) {
         if (recipient == null) {
@@ -25,12 +24,6 @@ public class RecipientValidator {
 
         if (existsRecipient(recipient)) {
             throw new DuplicateRecordException("This CPF is already in use");
-        }
-    }
-
-    public void validateAddressExists(PostRecipientDTO dto) {
-        if (!addressRepository.existsById(dto.addressId())) {
-            throw new EntityNotFoundException("Address does not exist");
         }
     }
 

@@ -39,8 +39,11 @@ public class RecipientService {
         repository.deleteById(id);
     }
 
-    public void update(Recipient recipient) {
+    public void update(UUID id, PostRecipientDTO dto) {
+        var recipient = repository.findById(id).orElse(null);
+
         validator.validate(recipient);
+        mapper.updateFromDTO(dto, recipient);
         repository.save(recipient);
     }
 }

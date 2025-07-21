@@ -21,4 +21,8 @@ public class RecipientService {
     public Optional<Recipient> get(UUID id) {
         return repository.findById(id);
     }
+
+    public void delete(UUID id) {
+        repository.deleteById(id);
+    }
 }

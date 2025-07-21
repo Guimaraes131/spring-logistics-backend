@@ -37,4 +37,11 @@ public class RecipientController implements GenericController {
                     return ResponseEntity.ok(dto);
                 }).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        service.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -38,4 +38,11 @@ public class RecipientController implements GenericController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable UUID id, @RequestBody PostRecipientDTO dto) {
+        service.update(id, dto);
+
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -19,6 +19,10 @@ public class RecipientValidator {
     private final AddressRepository addressRepository;
 
     public void validate(Recipient recipient) {
+        if (recipient == null) {
+            throw new EntityNotFoundException("Recipient does not exist");
+        }
+
         if (existsRecipient(recipient)) {
             throw new DuplicateRecordException("This CPF is already in use");
         }

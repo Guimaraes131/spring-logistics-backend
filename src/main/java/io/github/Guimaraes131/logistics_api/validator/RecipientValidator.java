@@ -1,9 +1,7 @@
 package io.github.Guimaraes131.logistics_api.validator;
 
-import io.github.Guimaraes131.logistics_api.controller.dto.PostRecipientDTO;
 import io.github.Guimaraes131.logistics_api.exception.DuplicateRecordException;
 import io.github.Guimaraes131.logistics_api.model.Recipient;
-import io.github.Guimaraes131.logistics_api.repository.AddressRepository;
 import io.github.Guimaraes131.logistics_api.repository.RecipientRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

@@ -5,15 +5,11 @@ import io.github.Guimaraes131.logistics_api.controller.dto.PostAddressDTO;
 import io.github.Guimaraes131.logistics_api.controller.mapper.AddressMapper;
 import io.github.Guimaraes131.logistics_api.model.Address;
 import io.github.Guimaraes131.logistics_api.service.AddressService;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.swing.text.html.parser.Entity;
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 

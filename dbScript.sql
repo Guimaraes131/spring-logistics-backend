@@ -23,7 +23,7 @@ CREATE TABLE tb_delivery(
     status VARCHAR(12) NOT NULL,
     creation_date TIMESTAMP NOT NULL,
     delivery_date TIMESTAMP,
-    recipient_id UUID,
+    recipient_id UUID NOT NULL,
     CONSTRAINT chk_status CHECK(status in ('PENDING', 'DISPATCHED', 'IN_TRANSIT', 'DELIVERED')),
     FOREIGN KEY (recipient_id) REFERENCES tb_recipient(id)
 );

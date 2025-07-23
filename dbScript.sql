@@ -22,7 +22,7 @@ CREATE TABLE tb_delivery(
     tracking_code VARCHAR(64) NOT NULL UNIQUE,
     status VARCHAR(12) NOT NULL,
     creation_date TIMESTAMP NOT NULL,
-    delivery_date TIMESTAMP NOT NULL,
+    delivery_date TIMESTAMP,
     recipient_id UUID,
     CONSTRAINT chk_status CHECK(status in ('PENDING', 'DISPATCHED', 'IN_TRANSIT', 'DELIVERED')),
     FOREIGN KEY (recipient_id) REFERENCES tb_recipient(id)

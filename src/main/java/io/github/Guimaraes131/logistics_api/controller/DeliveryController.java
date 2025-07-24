@@ -2,6 +2,7 @@ package io.github.Guimaraes131.logistics_api.controller;
 
 import io.github.Guimaraes131.logistics_api.controller.dto.GetDeliveryDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostDeliveryDTO;
+import io.github.Guimaraes131.logistics_api.controller.dto.UpdateDeliveryStatusDTO;
 import io.github.Guimaraes131.logistics_api.service.DeliveryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,13 @@ public class DeliveryController implements GenericController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         service.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateStatus(@PathVariable UUID id, @RequestBody UpdateDeliveryStatusDTO dto) {
+        service.updateStatus(id, dto);
 
         return ResponseEntity.noContent().build();
     }

@@ -1,13 +1,13 @@
 package io.github.Guimaraes131.logistics_api.controller;
 
+import io.github.Guimaraes131.logistics_api.controller.dto.GetProductDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostProductDTO;
 import io.github.Guimaraes131.logistics_api.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,5 +21,10 @@ public class ProductController implements GenericController {
         var entity = service.create(dto);
 
         return ResponseEntity.created(generateLocationHeader(entity.getId())).build();
+    }
+
+    @GetMapping("/by-id/{id}")
+    public ResponseEntity<GetProductDTO> getById(@PathVariable UUID id) {
+        return ResponseEntity.ok(service.getById(id));
     }
 }

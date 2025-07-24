@@ -1,5 +1,6 @@
 package io.github.Guimaraes131.logistics_api.controller.mapper;
 
+import io.github.Guimaraes131.logistics_api.controller.dto.GetDeliveryDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostDeliveryDTO;
 import io.github.Guimaraes131.logistics_api.model.Delivery;
 import io.github.Guimaraes131.logistics_api.repository.RecipientRepository;
@@ -15,4 +16,6 @@ public abstract class DeliveryMapper {
 
     @Mapping(target = "recipient", expression = "java( repository.findById(dto.recipientId()).orElse(null) )")
     public abstract Delivery toEntity(PostDeliveryDTO dto);
+
+    public abstract GetDeliveryDTO toDTO(Delivery delivery);
 }

@@ -41,6 +41,12 @@ public class GlobalExceptionHandler {
         return ErrorResponse.notFoundResponse(e.getMessage());
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        return ErrorResponse.badRequestResponse(e.getMessage());
+    }
+
     @ExceptionHandler(InvalidStatusException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleInvalidStatusException(InvalidStatusException e) {

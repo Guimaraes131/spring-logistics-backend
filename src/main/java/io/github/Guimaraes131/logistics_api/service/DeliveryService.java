@@ -64,6 +64,7 @@ public class DeliveryService {
     }
 
     public void updateStatus(UUID id, UpdateDeliveryStatusDTO dto) {
+        validator.validate(dto);
         repository.findById(id)
                 .map(delivery -> {
                     delivery.setStatus(dto.status());

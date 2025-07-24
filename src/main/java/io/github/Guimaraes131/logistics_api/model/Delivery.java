@@ -36,6 +36,6 @@ public class Delivery {
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Recipient recipient;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.REMOVE)
     private List<Product> products;
 }

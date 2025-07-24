@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,5 +36,12 @@ public class DeliveryController implements GenericController {
     @GetMapping("/by-recipient-cpf/{cpf}")
     public ResponseEntity<List<GetDeliveryDTO>> getByRecipientCpf(@PathVariable String cpf) {
         return ResponseEntity.ok(service.getByRecipientCpf(cpf));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        service.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

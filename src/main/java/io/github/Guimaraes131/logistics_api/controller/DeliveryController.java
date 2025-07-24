@@ -27,11 +27,7 @@ public class DeliveryController implements GenericController {
 
     @GetMapping("/by-tracking-code/{code}")
     public ResponseEntity<GetDeliveryDTO> getByTrackingCode(@PathVariable String code) {
-        return service.getByTrackingCode(code)
-                .map(ResponseEntity::ok)
-                .orElseGet(
-                        () -> ResponseEntity.notFound().build()
-                );
+        return ResponseEntity.ok(service.getByTrackingCode(code));
     }
 
     @GetMapping("/by-recipient-cpf/{cpf}")

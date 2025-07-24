@@ -3,8 +3,10 @@ package io.github.Guimaraes131.logistics_api.controller.common;
 import io.github.Guimaraes131.logistics_api.controller.dto.ErrorResponse;
 import io.github.Guimaraes131.logistics_api.controller.dto.FieldError;
 import io.github.Guimaraes131.logistics_api.exception.DuplicateRecordException;
+import io.github.Guimaraes131.logistics_api.exception.InvalidStatusException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -37,5 +39,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleEntityNotFoundException(EntityNotFoundException e) {
         return ErrorResponse.notFoundResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidStatusException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleInvalidStatusException(InvalidStatusException e) {
+        return ErrorResponse.badRequestResponse(e.getMessage());
     }
 }

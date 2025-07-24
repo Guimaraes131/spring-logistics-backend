@@ -42,9 +42,10 @@ public class DeliveryService {
         return repository.findById(id);
     }
 
-    public Optional<GetDeliveryDTO> getByTrackingCode(String code) {
+    public GetDeliveryDTO getByTrackingCode(String code) {
         return repository.findByTrackingCode(code)
-                .map(mapper::toDTO);
+                .map(mapper::toDTO)
+                .orElseThrow(() -> new EntityNotFoundException("Delivery does not exist"));
     }
 
     public List<GetDeliveryDTO> getByRecipientCpf(String cpf) {
@@ -63,6 +64,8 @@ public class DeliveryService {
                 .map(delivery -> {
                     delivery.setStatus(dto.status());
                     return repository.save(delivery);
-                }).orElseThrow(() -> new EntityNotFoundException("Delivery does not exist"));
+                }).orElseThrow(
+                        () -> new EntityNotFoundException("Delivery does not exist")
+                );
     }
 }

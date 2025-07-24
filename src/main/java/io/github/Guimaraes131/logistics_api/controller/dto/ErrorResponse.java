@@ -13,4 +13,8 @@ public record ErrorResponse(Integer status, String message, List<FieldError> err
     public static ErrorResponse notFoundResponse(String message) {
         return new ErrorResponse(HttpStatus.NOT_FOUND.value(), message, List.of());
     }
+
+    public static ErrorResponse badRequestResponse(String message) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), message, List.of());
+    }
 }

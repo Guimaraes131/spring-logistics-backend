@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,5 +27,10 @@ public class ProductController implements GenericController {
     @GetMapping("/by-id/{id}")
     public ResponseEntity<GetProductDTO> getById(@PathVariable UUID id) {
         return ResponseEntity.ok(service.getById(id));
+    }
+
+    @GetMapping("/by-delivery/{code}")
+    public ResponseEntity<List<GetProductDTO>> getByDelivery(@PathVariable String code) {
+        return ResponseEntity.ok(service.getByDelivery(code));
     }
 }

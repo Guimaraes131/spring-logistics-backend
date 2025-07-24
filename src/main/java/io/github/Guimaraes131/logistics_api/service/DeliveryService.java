@@ -12,6 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -67,6 +68,11 @@ public class DeliveryService {
         validator.validate(dto);
         repository.findById(id)
                 .map(delivery -> {
+
+                    if (dto.status().equals(Status.DELIVERED)) {
+                        delivery.setDeliveryDate(LocalDateTime.now());
+                    }
+
                     delivery.setStatus(dto.status());
                     return repository.save(delivery);
                 }).orElseThrow(

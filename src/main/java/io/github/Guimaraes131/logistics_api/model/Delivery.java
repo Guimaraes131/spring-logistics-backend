@@ -33,7 +33,7 @@ public class Delivery {
     @Column(name = "delivery_date")
     private LocalDateTime deliveryDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Recipient recipient;
 
     @OneToMany(mappedBy = "delivery")

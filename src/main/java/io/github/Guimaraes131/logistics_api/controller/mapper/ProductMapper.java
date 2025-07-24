@@ -1,5 +1,6 @@
 package io.github.Guimaraes131.logistics_api.controller.mapper;
 
+import io.github.Guimaraes131.logistics_api.controller.dto.GetProductDTO;
 import io.github.Guimaraes131.logistics_api.controller.dto.PostProductDTO;
 import io.github.Guimaraes131.logistics_api.model.Product;
 import io.github.Guimaraes131.logistics_api.repository.DeliveryRepository;
@@ -15,4 +16,6 @@ public abstract class ProductMapper {
 
     @Mapping(target = "delivery", expression = "java( repository.findById(dto.deliveryId()).orElse(null) )")
     public abstract Product toEntity(PostProductDTO dto);
+
+    public abstract GetProductDTO toDTO(Product entity);
 }

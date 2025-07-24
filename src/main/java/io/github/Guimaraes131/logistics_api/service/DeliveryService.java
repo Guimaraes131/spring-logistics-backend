@@ -7,6 +7,7 @@ import io.github.Guimaraes131.logistics_api.controller.mapper.DeliveryMapper;
 import io.github.Guimaraes131.logistics_api.model.Delivery;
 import io.github.Guimaraes131.logistics_api.model.enums.Status;
 import io.github.Guimaraes131.logistics_api.repository.DeliveryRepository;
+import io.github.Guimaraes131.logistics_api.validator.DeliveryValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,11 @@ public class DeliveryService {
 
     private final DeliveryRepository repository;
     private final DeliveryMapper mapper;
+    private final DeliveryValidator validator;
 
     public Delivery create(PostDeliveryDTO dto) {
+        validator.validate(dto);
+
         var entity = mapper.toEntity(dto);
         entity.setStatus(Status.PENDING);
         entity.setTrackingCode(

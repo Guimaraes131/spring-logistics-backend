@@ -9,7 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,5 +32,12 @@ public class ProductService {
                 .orElseThrow(
                         () -> new EntityNotFoundException("Product does not exist")
                 );
+    }
+
+    public List<GetProductDTO> getByDelivery(String code) {
+        return repository.findAllByDeliveryTrackingCode(code)
+                .stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

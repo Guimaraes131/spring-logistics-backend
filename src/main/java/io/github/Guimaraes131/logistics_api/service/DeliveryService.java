@@ -9,8 +9,10 @@ import io.github.Guimaraes131.logistics_api.repository.DeliveryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +38,12 @@ public class DeliveryService {
     public Optional<GetDeliveryDTO> getByTrackingCode(String code) {
         return repository.findByTrackingCode(code)
                 .map(mapper::toDTO);
+    }
+
+    public List<GetDeliveryDTO> getByRecipientCpf(String cpf) {
+        return repository.findByRecipientCpf(cpf)
+                .stream()
+                .map(mapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

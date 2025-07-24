@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.UUID;
 
-@Entity
 @Data
+@Entity
 @Table(name = "tb_product")
 public class Product {
 

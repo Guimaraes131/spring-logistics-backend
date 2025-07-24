@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/delivery")
@@ -28,5 +30,10 @@ public class DeliveryController implements GenericController {
                 .orElseGet(
                         () -> ResponseEntity.notFound().build()
                 );
+    }
+
+    @GetMapping("/by-recipient-cpf/{cpf}")
+    public ResponseEntity<List<GetDeliveryDTO>> getByRecipientCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok(service.getByRecipientCpf(cpf));
     }
 }
